@@ -1,7 +1,7 @@
 ## Docker Book - Notes
 
 Installing docker on linux
-```bash
+```shell
 # install dependencies
 $ apt-get install apt-transport-https ca-certificates curl software-properties-common
 
@@ -16,4 +16,36 @@ $ sudo apt-get update
 
 # install docker engine
 $ sudo apt-get install docker-ce
+
+# test docker installation
+$ sudo docker info
+```
+
+If using UFW (Uncomplicated Firewall) on Ubuntu, we should enable `forwarding packets`.
+Update `DEFAULT_FORWARD_POLICY` on `/etc/default/ufw` file.
+
+```shell
+DEFAULT_FORWARD_POLICY="ACCEPT"
+```
+
+Save and reload UFW.
+```shell
+$ sudo ufw reload
+```
+
+## Docker service commands
+
+```
+# Check status
+$ sudo service docker status
+
+# Stop Docker 
+$ sudo service docker stop
+
+# Start Docker
+$ sudo service docker start
+
+# upgrade docker
+$ sudo apt-get update
+$ sudo apt-get install docker-engine
 ```
