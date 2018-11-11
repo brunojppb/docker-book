@@ -155,6 +155,17 @@ $ docker run \
 		/bin/sh -c "while true; do echo hi there!; sleep 1; done"
 ```
 
+## Inspecting containers
+You can inspect the container to check commands, network settings and etc...
+```sh
+$ docker inspect <container_name>
+
+# We can also selectively query for specific settings when inspecting
+# Lets check for the IP address of the container using the --format flag
+$ docker inspect --format='{{ .NetworkSettings.IPAddress }}' daemon_bruno
+```
+
+
 
 
 
