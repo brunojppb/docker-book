@@ -1,6 +1,6 @@
 ## Docker Images
 
-A image is a `ready only` stack with whatever dependecy we need that can be used as base for our containers.
+A image is a `read-only` stack with whatever dependecy we need that can be used as base for our containers.
 
 Using the `copy on write` pattern, docker can quickly read the `to be written` file from the image, make a copy of it and put it to be adited by the container. This is what makes docker so powerful.
 
