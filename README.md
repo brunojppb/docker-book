@@ -96,7 +96,7 @@ docker run \
 
 To check if the container is running the `while`argument:
 ```sh
-# this is return the last few logs and exit
+# return the last few logs and exit
 $ docker logs daemon_bruno
 
 # To tail the logs, use the -f flag
@@ -131,6 +131,14 @@ Lets create a file in a running container issuing a command to run in background
 ```sh
 $ docker exec -d daemon_bruno touch /etc/my_new_file
 ```
+
+We can also run an interactive command like this:
+```sh
+docker exec -t -i daemon_bruno /bin/bash
+# That will make the console available for issuing commands
+```
+
+
 
 
 
