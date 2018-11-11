@@ -72,6 +72,71 @@ $ docker ps
 
 # Create a container with specific name
 $ docker run --name my_awesome_container -i -t ubuntu /bin/bash
+
+# Remove specific container
+$ docker rm my_awesome_container
+
+# Start specific container by name
+$ docker start my_awesome_container
+
+# To issue commands
+$ docker attach my_awesome_container
 ```
+
+## Deamon Containers
+
+This command will start a ubuntu container and will execute this while loop until the container is stopped. 
+```sh
+# -d = detach container to the background
+docker run \
+       --name daemon_bruno \
+       -d ubuntu \
+       /bin/sh -c "while true; do echo hello world; sleep 1; done"
+```
+
+To check if the container is running the `while`argument:
+```sh
+# this is return the last few logs and exit
+$ docker logs daemon_bruno
+
+# To tail the logs, use the -f flag
+$ docker logs -f daemon_bruno
+
+# To get the last 10 lines of logs
+$ docker logs --tail 10 daemon_bruno
+
+# To tail without reading any previus logs
+$ docker logs --tail 0 -f daemon_bruno
+
+# To enhance the logs with timestamps
+$ docker logs --tail 0 -ft daemon_bruno
+```
+
+## Inspect Container
+
+To inspect the processes running inside the container
+```sh
+$ docker top daemon_bruno
+```
+
+To check statistics of a running container
+```sh
+# optionally, we can also pass more container names or IDs and get a live view of their stats. Here we should see CPU, MEM, Network and etc...
+$ docker stats daemon_bruno <more_container_names_here>
+```
+
+## Running a process in a running container
+
+Lets create a file in a running container issuing a command to run in background using the command `exec` and the `-d` flag.
+```sh
+$ docker exec -d daemon_bruno touch /etc/my_new_file
+```
+
+
+
+
+
+
+
 
 
