@@ -4,4 +4,4 @@ Following along [The docker book](https://dockerbook.com/) and taking some notes
 
 ## Index
 
-- [Basics](./basics.md): Installation and basic commands
+- [Basics - Chapter 1 to 3](./basics.md): Installation and basic commands

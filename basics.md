@@ -1,4 +1,4 @@
-Installing docker on linux
+## Installing docker on linux
 ```sh
 # install dependencies
 $ apt-get install apt-transport-https ca-certificates curl software-properties-common
@@ -26,7 +26,7 @@ Update `DEFAULT_FORWARD_POLICY` on `/etc/default/ufw` file.
 DEFAULT_FORWARD_POLICY="ACCEPT"
 ```
 
-Save and reload UFW.
+Save and reload **UFW**.
 ```sh
 $ sudo ufw reload
 ```
