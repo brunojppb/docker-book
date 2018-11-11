@@ -138,6 +138,23 @@ docker exec -t -i daemon_bruno /bin/bash
 # That will make the console available for issuing commands
 ```
 
+## Setup automatic restarts
+
+The default behaviour is to not restart a container at all if something goes wrong and it goes off. 
+If we want our container to be restarted automatically, we need to configure it when creating the container.
+```sh
+$ docker run \
+		--restart=always \
+		--name daemon_bob -d ubuntu \
+		/bin/sh -c "while true; do echo hi there!; sleep 1; done"
+
+# We can optionally pass the number of times the container will try to restart		
+$ docker run \
+		--restart=on-failure:5 \
+		--name daemon_bob -d ubuntu \
+		/bin/sh -c "while true; do echo hi there!; sleep 1; done"
+```
+
 
 
 
