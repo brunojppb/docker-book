@@ -57,4 +57,21 @@ $ sudo apt-get install docker-engine
 # ubuntu = which image to use when creating the container. Ubuntu is a base image provided by docker
 # /bin/bash = run the bash command inside container
 $ sudo docker run -i -t ubuntu /bin/bash
+
+# Now we can play with a fully fledged ubuntu container 
+#Type exit to go back to host OS
 ```
+
+## More commands
+```sh
+# list containers
+# -a = all containers
+$ docker ps -a
+# to only list running containers
+$ docker ps
+
+# Create a container with specific name
+$ docker run --name my_awesome_container -i -t ubuntu /bin/bash
+```
+
+
