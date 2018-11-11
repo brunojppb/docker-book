@@ -4,4 +4,5 @@ Following along [The docker book](https://dockerbook.com/) and taking some notes
 
 ## Index
 
-- [Basics - Chapter 1 to 3](./basics.md): Installation and basic commands
+- [Basics: Chapter 1-3](./basics.md) - Installation and basic commands
+- [Docker Images: Chapter 4](./chapter_4.md) - Understanding the file system and Docker images
