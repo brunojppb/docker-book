@@ -70,3 +70,10 @@ $ docker images
 REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
 bruno/static_web        latest              716dfe04f9fb        8 minutes ago       197MB
 ```
+
+## Caching during docker build
+Docker is smart enough to cache each step when bunding the image. 
+In the example above, we want to make sure the `apt-get update` command is always executed, so we have to run the build command with `--no-cache` flag.
+```sh
+$ docker build --no-cache -t="bruno/static_web" .
+``` 
