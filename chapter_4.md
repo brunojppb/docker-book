@@ -38,4 +38,20 @@ docker run -t -i \
 	/bin/bash
 ```
 
+## Building custom images
 
+To build custom images, we need a `Dockerfile` that will execute whatever commands we need to setup the image.
+Here is a NGINX image example
+```dockerfile
+# Version: 0.0.1
+# Use the ubuntu image tagged with 16.04 as base
+FROM ubuntu:16.04
+LABEL maintainer="bruno@example.com"
+# perform updates and install nginx
+RUN apt-get update; apt-get install -y nginx
+# Create html file with content
+RUN echo 'Hi there, I am a web server container' \
+  >/var/www/html/index.html
+# make port 80 available
+EXPOSE 80
+``` 
