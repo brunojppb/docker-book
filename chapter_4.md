@@ -55,3 +55,18 @@ RUN echo 'Hi there, I am a web server container' \
 # make port 80 available
 EXPOSE 80
 ``` 
+
+Now lets build the image using our `Dockerfile`:
+```
+# This command will generate a new image based on our requirements
+# -t= add a mark image with repository and name
+# the trailing . is the path to the Dockerfile. We can also pass a URL
+$ docker build -t="bruno/static_web" .
+```
+
+It should perform every command in the `Dockerfile` sequencially. At the end, we should have an image listed
+```
+$ docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+bruno/static_web        latest              716dfe04f9fb        8 minutes ago       197MB
+```
