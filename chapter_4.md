@@ -57,7 +57,7 @@ EXPOSE 80
 ``` 
 
 Now lets build the image using our `Dockerfile`:
-```
+```sh
 # This command will generate a new image based on our requirements
 # -t= add a mark image with repository and name
 # the trailing . is the path to the Dockerfile. We can also pass a URL
@@ -77,3 +77,10 @@ In the example above, we want to make sure the `apt-get update` command is alway
 ```sh
 $ docker build --no-cache -t="bruno/static_web" .
 ``` 
+
+## Binding container port to host
+We can bind a port in the host machine to the container like this
+```sh
+$ docker run -d -p 8080:80 --name static_web_8080 bruno/static_web nginx -g "daemon off;"
+```
+Go to your localhost:8080 and check the result
