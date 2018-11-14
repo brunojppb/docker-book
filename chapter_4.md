@@ -84,3 +84,8 @@ We can bind a port in the host machine to the container like this
 $ docker run -d -p 8080:80 --name static_web_8080 bruno/static_web nginx -g "daemon off;"
 ```
 Go to your localhost:8080 and check the result
+
+## Dockerfile Commands
+
+The `CMD` command executes commands when the container is launched. The `RUN` executes when the image is being built.
+**Heads-up**: The `CMD` in the Dockerfile can be overwritten when passing a command to the `docker run` instruction.
