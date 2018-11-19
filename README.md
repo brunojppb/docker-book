@@ -6,3 +6,4 @@ Following along [The docker book](https://dockerbook.com/) and taking some notes
 
 - [Basics: Chapter 1-3](./basics.md) - Installation and basic commands
 - [Docker Images: Chapter 4](./chapter_4.md) - Understanding the file system and Docker images
+- [Docker Registry](./chapter_4_registry.md)) - Running our own registry
