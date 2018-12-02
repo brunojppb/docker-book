@@ -1,0 +1,13 @@
+version: '3'
+services:
+  
+  web:
+    image: bruno/composeapp
+    command: python app.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/composeapp
+
+  redis:
+    image: redis
