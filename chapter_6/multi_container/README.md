@@ -20,12 +20,15 @@ Now lets make our node.js image
 ```dockerfile
 FROM ubuntu:16.04
 LABEL maintainer="bruno@example.com"
-ENV REFRESHED_AT 2018-12-01
+ENV REFRESHED_AT 2018-12-02
 
 RUN apt-get -yqq update
-RUN apt-get -yqq install nodejs npm
-# Backwards compatibility issues on Ubuntu
-RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN apt-get -yqq install curl build-essential
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+
+# check node version
+RUN echo $(nodejs -v)
 # Create logs folder
 RUN mkdir -p /var/log/nodeapp
 # Add our local nodeapp folder to opt
@@ -100,7 +103,7 @@ ENV REFRESHED_AT 2018-12-01
 
 # fire up redis server and make it slave of the primary redis instance
 # also point logs to same persistent volume declared in base image
-ENTRYPOINT [ "redis-server", "--protected-mode no", "--logfile / var/log/redis/redis-replica.log", "--slaveof redis_primary 6379" ]
+ENTRYPOINT [ "redis-server", "--protected-mode no", "--logfile /var/log/redis/redis-replica.log", "--slaveof redis_primary 6379" ]
 ```
 
 ## Running our cluster in a docker network
@@ -117,4 +120,39 @@ Now lets run the redis primary container on the previously created network
 # -h = Sets the hostname of the container
 # --net = specify docker network
 docker run -d -h redis_primary --net express --name redis_primary bruno/redis_primary
+```
+
+Lets check the logs from our redis container
+```sh
+docker logs redis_primary
+```
+You will see nothing. The reason behind this is that redis is logging into a file we specified in the image instead of the default output.  
+Lets create a temporary container and `cat` the log file
+```sh
+docker run -ti --rm --volumes-from redis_primary ubuntu cat /var/log/redis/redis-server.log
+```
+Here we can see that out redis server is running as expected.
+
+
+Lets fire up our redis replica
+```sh
+docker run -d -h redis_replica1 --name redis_replica1 --net express bruno/redis_replica
+```
+
+Now lets check the container logs
+```sh
+docker run -ti --rm --volumes-from redis_replica1 ubuntu cat /var/log/redis/redis-replica.log
+```
+Now we can see that our redis replica is connected to the master redis and the sync works!
+
+
+Lets add a second replica
+```sh
+docker run -d -h redis_replica2 --name redis_replica2 --net express bruno/redis_replica
+```
+
+### Creating our nodejs container
+Lets create our nodejs app container
+```sh
+docker run -d -p 3000:3000 --name nodeapp --net express bruno/nodejs
 ```
